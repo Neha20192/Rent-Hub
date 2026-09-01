@@ -1,0 +1,81 @@
+<section class="login-page">
+  <div class="login-card">
+    <h1>Create Account</h1>
+    <p>Join RentHub to explore or post property listings.</p>
+
+    @if (errorMessage) {
+      <div class="alert-error">{{ errorMessage }}</div>
+    }
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      
+      <!-- Full Name -->
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="Enter your full name"
+        />
+        @if (registerForm.controls.name.touched && registerForm.controls.name.invalid) {
+          <small class="error">Name is required (at least 2 characters).</small>
+        }
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="Enter your email"
+        />
+        @if (registerForm.controls.email.touched && registerForm.controls.email.invalid) {
+          <small class="error">
+            @if (registerForm.controls.email.hasError('required')) { Email is required. }
+            @if (registerForm.controls.email.hasError('email')) { Please enter a valid email address. }
+          </small>
+        }
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="Create a password"
+        />
+        @if (registerForm.controls.password.touched && registerForm.controls.password.invalid) {
+          <small class="error">
+            @if (registerForm.controls.password.hasError('required')) { Password is required. }
+            @if (registerForm.controls.password.hasError('minlength')) { Password must be at least 6 characters. }
+          </small>
+        }
+      </div>
+
+      <!-- Account Role Selection -->
+      <div class="form-group">
+        <label>Account Type</label>
+        <div class="role-selector">
+          <label>
+            <input type="radio" value="user" formControlName="role" /> Normal User
+          </label>
+          <label>
+            <input type="radio" value="admin" formControlName="role" /> Admin / Lister
+          </label>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="registerForm.invalid">Register</button>
+
+      <p class="auth-switch">
+        Already have an account? <a routerLink="/login">Login here</a>
+      </p>
+
+    </form>
+  </div>
+</section>

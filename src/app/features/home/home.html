@@ -1,0 +1,28 @@
+<section class="hero">
+  <div class="hero-content">
+    <h1>Find Your Perfect Home</h1>
+    <p>Discover apartments and homes for rent that match your lifestyle.</p>
+
+    <div class="search-box">
+      <input
+        type="text"
+        placeholder="Search by city or location"
+        [(ngModel)]="searchTerm"
+      />
+
+      <select [(ngModel)]="selectedType">
+        <option value="">Select</option>
+        <option value="apartment">Apartment</option>
+        <option value="house">House</option>
+        <option value="villa">Villa</option>
+      </select>
+
+    </div>
+  </div>
+</section>
+
+
+<app-property-list 
+  [searchTerm]="searchTerm" 
+  [selectedType]="selectedType">
+</app-property-list>

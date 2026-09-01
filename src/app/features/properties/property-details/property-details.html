@@ -1,0 +1,103 @@
+@if (property) {
+
+<section class="property-details">
+  <a routerLink="/" class="back-link">
+    ← Back to Properties
+  </a>
+
+  <div class="property-image">
+    <img [src]="property.imageUrl" [alt]="property.title" />
+  </div>
+
+  <div class="property-content">
+    <h1>{{ property.title }}</h1>
+    <p class="location">{{ property.location }}</p>
+    <p class="description">{{ property.description }}</p>
+
+    <div class="property-info">
+      <span>{{ property.bedrooms }} Bedrooms</span>
+      <span>{{ property.bathrooms }} Bathrooms</span>
+      <span>{{ property.propertyType }}</span>
+    </div>
+
+    <div class="rent">₹{{ property.rent }}/month</div>
+
+    @if (property.available) {
+    <p class="available">Available for rent</p>
+    }
+
+    <button type="button">Show Interest</button>
+    @if (isAdmin$ | async) {
+    <button type="button" [routerLink]="['/edit-post', property.id]">Edit Post</button>
+    }
+
+  </div>
+</section>
+
+<!-- ================= COMMENTS & Q&A SECTION ================= -->
+<section class="comments-section">
+  <h2>Questions & Discussion</h2>
+
+  <!-- Form to post new comment -->
+  <div class="add-comment-card">
+    <h3>Ask a question or leave feedback</h3>
+    <div class="form-group">
+      <input type="text" placeholder="Your Name" [(ngModel)]="newAuthorName" />
+      <textarea rows="3" placeholder="Type your question or message here..." [(ngModel)]="newCommentText"></textarea>
+      <button type="button" (click)="addComment()">Post Comment</button>
+    </div>
+  </div>
+
+  <!-- Display list of comments -->
+  <div class="comments-list">
+    @for (comment of property.comments; track comment.id) {
+    <div class="comment-card">
+      <div class="comment-header">
+        <strong>{{ comment.authorName }}</strong>
+        <span class="comment-date">{{ comment.createdAt | date:'short' }}</span>
+      </div>
+
+      <p class="comment-text">{{ comment.text }}</p>
+
+      <button class="btn-reply-toggle" (click)="toggleReply(comment.id)">
+        {{ activeReplyId === comment.id ? 'Cancel' : 'Reply' }}
+      </button>
+
+      <!-- Inline Reply Form -->
+      @if (activeReplyId === comment.id) {
+      <div class="reply-form">
+        <input type="text" placeholder="Your Name" [(ngModel)]="replyAuthorName" />
+        <textarea rows="2" placeholder="Write a reply..." [(ngModel)]="replyText"></textarea>
+        <button type="button" (click)="addReply(comment)">Submit Reply</button>
+      </div>
+      }
+
+      <!-- Nested Replies List -->
+      @if (comment.replies && comment.replies.length > 0) {
+      <div class="replies-list">
+        @for (reply of comment.replies; track reply.id) {
+        <div class="reply-card">
+          <div class="comment-header">
+            <strong>{{ reply.authorName }}</strong>
+            <span class="comment-date">{{ reply.createdAt | date:'short' }}</span>
+          </div>
+          <p class="comment-text">{{ reply.text }}</p>
+        </div>
+        }
+      </div>
+      }
+    </div>
+    } @empty {
+    <p class="no-comments">No questions yet. Be the first to ask!</p>
+    }
+  </div>
+</section>
+
+} @else {
+
+<section class="not-found">
+  <h2>Property not found</h2>
+  <p>The property you are looking for does not exist.</p>
+</section>
+
+}

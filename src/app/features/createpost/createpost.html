@@ -1,0 +1,79 @@
+<section class="create-post-container">
+  <h2>Create New Property Post</h2>
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+    
+    <!-- Title -->
+    <div class="form-group">
+      <label for="title">Property Title *</label>
+      <input id="title" type="text" formControlName="title" placeholder="e.g. Modern 2 BHK Apartment" />
+      @if (postForm.get('title')?.touched && postForm.get('title')?.invalid) {
+        <small class="error">Title is required (at least 5 characters).</small>
+      }
+    </div>
+
+    <!-- Location -->
+    <div class="form-group">
+      <label for="location">Location *</label>
+      <input id="location" type="text" formControlName="location" placeholder="e.g. Kanpur" />
+      @if (postForm.get('location')?.touched && postForm.get('location')?.invalid) {
+        <small class="error">Location is required.</small>
+      }
+    </div>
+
+    <!-- Rent -->
+    <div class="form-group">
+      <label for="rent">Monthly Rent (₹) *</label>
+      <input id="rent" type="number" formControlName="rent" placeholder="e.g. 15000" />
+      @if (postForm.get('rent')?.touched && postForm.get('rent')?.invalid) {
+        <small class="error">Valid rent amount is required.</small>
+      }
+    </div>
+
+    <!-- Row for Bedrooms, Bathrooms & Property Type -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="bedrooms">Bedrooms *</label>
+        <input id="bedrooms" type="number" formControlName="bedrooms" min="1" />
+      </div>
+
+      <div class="form-group">
+        <label for="bathrooms">Bathrooms *</label>
+        <input id="bathrooms" type="number" formControlName="bathrooms" min="1" />
+      </div>
+
+      <div class="form-group">
+        <label for="propertyType">Property Type *</label>
+        <select id="propertyType" formControlName="propertyType">
+          <option value="Apartment">Apartment</option>
+          <option value="House">House</option>
+          <option value="Villa">Villa</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Image URL -->
+    <div class="form-group">
+      <label for="imageUrl">Image Path / URL *</label>
+      <input id="imageUrl" type="text" formControlName="imageUrl" placeholder="assets/images/img1.jpg" />
+    </div>
+
+    <!-- Description -->
+    <div class="form-group">
+      <label for="description">Description *</label>
+      <textarea id="description" rows="4" formControlName="description" placeholder="A spacious and modern apartment..."></textarea>
+      @if (postForm.get('description')?.touched && postForm.get('description')?.invalid) {
+        <small class="error">Description is required.</small>
+      }
+    </div>
+
+    <!-- Availability Checkbox -->
+    <div class="form-group checkbox-group">
+      <label>
+        <input type="checkbox" formControlName="available" />
+        Available for Rent
+      </label>
+    </div>
+
+    <button type="submit" class="btn-submit">Submit Property</button>
+  </form>
+</section>

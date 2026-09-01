@@ -1,0 +1,50 @@
+<section class="properties-section">
+  <div class="section-header">
+    <h2>Featured Properties</h2>
+    <p>Explore some of our available rental properties.</p>
+  </div>
+
+  <div class="property-grid">
+    @for (property of filteredProperties; track property.id) {
+    <div class="property-card">
+      <div class="property-image">
+        <img [src]="property.imageUrl" [alt]="property.title" />
+      </div>
+
+      <div class="property-content">
+
+  <div class="property-title-row">
+    <h3>{{ property.title }}</h3>
+
+    <button
+      type="button"
+      class="favourite-btn"
+      (click)="toggleFavourite(property.id)">
+
+      {{ isFavourite(property.id) ? '♥' : '♡' }}
+
+    </button>
+  </div>
+        <p class="location">{{ property.location }}</p>
+        <p class="description">{{ property.description }}</p>
+
+        <div class="property-info">
+          <span>{{ property.bedrooms }} Beds</span>
+          <span>{{ property.bathrooms }} Baths</span>
+        </div>
+
+        <div class="property-footer">
+          <strong>₹{{ property.rent }}/month</strong>
+          <button type="button" [routerLink]="['/properties', property.id]">
+            View Details
+          </button>
+        </div>
+      </div>
+    </div>
+    } @empty {
+    <div class="no-results">
+      <p>No properties match your search criteria.</p>
+    </div>
+    }
+  </div>
+</section>
