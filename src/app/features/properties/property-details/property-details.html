@@ -26,7 +26,6 @@
     <p class="available">Available for rent</p>
     }
 
-    <button type="button">Show Interest</button>
     @if (isAdmin$ | async) {
     <button type="button" [routerLink]="['/edit-post', property.id]">Edit Post</button>
     }
