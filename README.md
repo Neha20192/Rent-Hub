@@ -1,59 +1,52 @@
-# RentHub
+# 🏠 RentHub — Property Listing & Rental Management App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.4.
+**RentHub** is a modern, responsive Angular web application for browsing, listing, and managing residential property rentals. Built with Angular (Standalone Components), Reactive Forms, custom RxJS state/auth management, and end-to-end unit tests powered by Vitest.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🔗 Quick Links
 
-```bash
-ng serve
-```
+* **GitHub Repository:** [https://github.com/Neha20192/Rent-Hub](https://github.com/Neha20192/Rent-Hub)
+* **Live Application:** [https://rent-hub-blue.vercel.app/](https://rent-hub-blue.vercel.app/) 
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🔑 Demo User Credentials
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Use the following credentials to test different application roles and permissions:
 
-```bash
-ng generate component component-name
-```
+| Role | Email / Username | Password | Access Permissions |
+| :--- | :--- | :--- | :--- |
+| **Admin** | `test@renthub.com` | `123456` | Full Access: View listings, create, edit properties |
+| **Normal User** | `user@renthub.com` | `123456` | View listings & manage favorite properties |
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## 🌟 Key Features
 
-## Building
+### 👤 User & Role Management
+* **Role-Based Access Control (RBAC):** Distinct permissions for Users vs. Admins.
+* **Authentication Service:** State-driven auth managed via RxJS `BehaviorSubject` and `localStorage` persistence.
+* **Dynamic Header & Navigation:** UI elements adapt dynamically based on user login state and role.
 
-To build the project run:
+### 🏢 Property Listings & Management
+* **Property Feed & Details:** Browse property listings with detailed views including location, rent pricing, room configurations, and property type.
+* **Full CRUD Operations (Admin):**
+  * **Create Post:** Add property listings with image URLs, pricing, availability, and description.
+  * **Edit Post:** Edit existing posts pre-filled via Reactive Forms (`patchValue`).
+* **Favorites System:** Save preferred listings directly to a personal bookmarks collection.
 
-```bash
-ng build
-```
+### 🎯 Form Handling & Validation
+* Robust **Reactive Forms** (`FormGroup`, `FormControl`) with client-side validation rules.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+## 🛠️ Tech Stack & Architecture
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+* **Frontend Framework:** Angular 22 (Standalone Components)
+* **State & Data Persistence:** RxJS (`BehaviorSubject`), `localStorage`
+* **Styling & UI:** Responsive scss layout
+* **Testing Framework:** Vitest + `@angular/core/testing` (`TestBed`)
+* **Deployment:** Vercel
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
