@@ -4,7 +4,7 @@ import { PropertyComment } from '../../../Model/comment.model'; // Updated impor
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PropertyService } from '../../../services/property';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, UpperCasePipe } from '@angular/common';
 import { Auth } from '../../../services/auth/auth';
 import { map } from 'rxjs';
 

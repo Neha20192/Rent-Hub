@@ -1,13 +1,13 @@
 <section class="create-post-container">
   <h2>Create New Property Post</h2>
   <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
-    
+
     <!-- Title -->
     <div class="form-group">
       <label for="title">Property Title *</label>
       <input id="title" type="text" formControlName="title" placeholder="e.g. Modern 2 BHK Apartment" />
       @if (postForm.get('title')?.touched && postForm.get('title')?.invalid) {
-        <small class="error">Title is required (at least 5 characters).</small>
+      <small class="error">Title is required (at least 5 characters).</small>
       }
     </div>
 
@@ -16,7 +16,7 @@
       <label for="location">Location *</label>
       <input id="location" type="text" formControlName="location" placeholder="e.g. Kanpur" />
       @if (postForm.get('location')?.touched && postForm.get('location')?.invalid) {
-        <small class="error">Location is required.</small>
+      <small class="error">Location is required.</small>
       }
     </div>
 
@@ -25,7 +25,7 @@
       <label for="rent">Monthly Rent (₹) *</label>
       <input id="rent" type="number" formControlName="rent" placeholder="e.g. 15000" />
       @if (postForm.get('rent')?.touched && postForm.get('rent')?.invalid) {
-        <small class="error">Valid rent amount is required.</small>
+      <small class="error">Valid rent amount is required.</small>
       }
     </div>
 
@@ -52,17 +52,27 @@
     </div>
 
     <!-- Image URL -->
-    <div class="form-group">
-      <label for="imageUrl">Image Path / URL *</label>
-      <input id="imageUrl" type="text" formControlName="imageUrl" placeholder="assets/images/img1.jpg" />
+    <div style="margin-bottom: 1.5rem;">
+      <input id="imageUpload" type="file" accept="image/*" (change)="onFileSelected($event)" />
+
+      @if (postForm.get('imageUrl')?.touched && postForm.get('imageUrl')?.invalid) {
+      <small class="error" style="display: block; margin-top: 0.25rem;">
+        Please upload a valid property image.
+      </small>
+      }
     </div>
 
     <!-- Description -->
-    <div class="form-group">
-      <label for="description">Description *</label>
-      <textarea id="description" rows="4" formControlName="description" placeholder="A spacious and modern apartment..."></textarea>
+    <div class="form-group" style="margin-bottom: 1.5rem;">
+      <label for="description" style="display: block; margin-bottom: 0.5rem;">Description *</label>
+      <textarea id="description" rows="4" formControlName="description"
+        placeholder="A spacious and modern apartment...">
+  </textarea>
+
       @if (postForm.get('description')?.touched && postForm.get('description')?.invalid) {
-        <small class="error">Description is required.</small>
+      <small class="error" style="display: block; margin-top: 0.25rem;">
+        Description is required.
+      </small>
       }
     </div>
 

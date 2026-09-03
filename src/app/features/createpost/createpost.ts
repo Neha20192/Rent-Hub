@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class Createpost {
   postForm!: FormGroup;
+  imagePreview: string | null = null;
 
   constructor(private fb: FormBuilder,
     private propertyService: PropertyService,
@@ -26,7 +27,7 @@ export class Createpost {
       bedrooms: [1, [Validators.required, Validators.min(1)]],
       bathrooms: [1, [Validators.required, Validators.min(1)]],
       propertyType: ['Apartment', Validators.required],
-      imageUrl: ['assets/images/img1.jpg', Validators.required],
+      imageUrl: ['', Validators.required],
       available: [true, Validators.required]
     });
   }
@@ -39,5 +40,24 @@ export class Createpost {
 
     this.propertyService.addProperty(this.postForm.value);
     this.router.navigate(['/']);
+  }
+
+  onFileSelected(event: Event): void {
+    const fileInput = event.target as HTMLInputElement;
+    console.log(event);
+    if (fileInput.files && fileInput.files[0]) {
+      const file = fileInput.files[0];
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const base64Image = reader.result as string;
+        
+        this.postForm.patchValue({ imageUrl: base64Image });
+        this.postForm.get('imageUrl')?.markAsTouched();
+        this.imagePreview = base64Image;
+      };
+
+      reader.readAsDataURL(file); 
+    }
   }
 }

@@ -10,7 +10,7 @@ describe('Createpost Component', () => {
   let mockPropertyService: { addProperty: ReturnType<typeof vi.fn> };
 
   beforeEach(async () => {
-    // Vitest equivalent of createSpyObj
+
     mockPropertyService = {
       addProperty: vi.fn(),
     };
@@ -47,7 +47,6 @@ describe('Createpost Component', () => {
 
     component.onSubmit();
 
-    // Vitest assertions
     expect(mockPropertyService.addProperty).toHaveBeenCalled();
     expect(mockPropertyService.addProperty).toHaveBeenCalledTimes(1);
   });

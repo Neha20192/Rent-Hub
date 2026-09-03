@@ -21,9 +21,7 @@ export class PropertyService {
     }
   ];
 
-  // Initialize state from localStorage or initial array
   private propertiesSubject = new BehaviorSubject<Property[]>(this.loadFromStorage());
-  // properties$: Observable<Property[]> = this.propertiesSubject.asObservable();
 
   private loadFromStorage(): Property[] {
     const saved = localStorage.getItem('renthub_properties');
@@ -54,13 +52,13 @@ export class PropertyService {
     const index = properties.findIndex((p) => p.id === updatedProperty.id);
 
     if (index !== -1) {
-      properties[index] = updatedProperty; // Replace old data with edited data
-      this.propertiesSubject.next(properties); // Update RxJS Subject listeners
-      localStorage.setItem('renthub_properties', JSON.stringify(properties)); // Persist to storage
+      properties[index] = updatedProperty; 
+      this.propertiesSubject.next(properties); 
+      localStorage.setItem('renthub_properties', JSON.stringify(properties)); 
     }
   }
 
-  // DELETE PROPERTY METHOD
+
   deleteProperty(id: number): void {
     const filtered = this.getProperties().filter((p) => p.id !== id);
     this.propertiesSubject.next(filtered);
